@@ -4,6 +4,8 @@ import App from "./components/App";
 import CatchGame from "./components/game/CatchGame";
 import LeaderBoard from "./components/leaderboard/LeaderBoard";
 import { createBrowserRouter, createHashRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./components/game/utils/store";
 
 
 const router = createHashRouter([
@@ -25,5 +27,7 @@ const router = createHashRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  <Provider store = {store}>
     <RouterProvider router={router} />
+  </Provider>
 );

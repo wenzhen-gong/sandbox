@@ -1,46 +1,26 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: {
-    app: './client/index.js',
+    app: "./client/index.js",
   },
-  
-  devtool: 'inline-source-map',
+
+  devtool: "inline-source-map",
 
   devServer: {
-    port: 8080,
+    port: 8081,
     static: {
-        publicPath: '/',
-        directory: path.join(__dirname, '/dist')
+      publicPath: "/",
+      directory: path.join(__dirname, "/dist"),
     },
-    // proxy: {
-    //     '/': {
-    //       target: 'http://localhost:3000',
-    //       secure: false,
-    //       },
-    //     "/recommendation": {
-    //       target: "http://localhost:3000",
-    //       secure: false,
-    //        },
-    //     "/session": {
-    //       target: "http://localhost:3000",
-    //       secure: false,
-    //       },
-    //     "/signin": {
-    //       target: "http://localhost:3000",
-    //       secure: false,
-    //       },
-    //       "/mymovies": {
-    //         target: "http://localhost:3000",
-    //         secure: false,
-    //         },
-    //         "/mymovies2": {
-    //           target: "http://localhost:3000",
-    //           secure: false,
-    //           },
-    // },
+    proxy: {
+      "/sendscore": {
+        target: "http://localhost:3000",
+        secure: false,
+      },
+    },
 
     // // for some reason HMR does not work properly. So liveReload is being used (hot has to be set to false to make liveReload work)
     hot: false,
@@ -51,19 +31,18 @@ module.exports = {
   },
 
   plugins: [
-    // new CleanWebpackPlugin(), //<-- deleting dist folder contents when running sever
     new HtmlWebpackPlugin({
-      template: './client/index.html',
+      template: "./client/index.html",
     }),
   ],
 
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/',
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+    publicPath: "/",
   },
 
-  mode:'development',
+  mode: "development",
 
   module: {
     rules: [
@@ -71,31 +50,32 @@ module.exports = {
         test: /\.(?:js|mjs|cjs|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env', ['@babel/preset-react', {"runtime": "automatic"}]]
-          }
+            presets: [
+              "@babel/preset-env",
+              ["@babel/preset-react", { runtime: "automatic" }],
+            ],
+          },
         },
       },
       {
         test: /\.(css|sass|scss)$/,
-        // excluding everything under node_modules except /bootstrap
         exclude: /node_modules(?!\/bootstrap)/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
-        exclude: /node_modules(?!\/bootstrap)/,
+        exclude: /node_modules/,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
           },
         ],
-      }
+      },
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: [".js", ".jsx"],
   },
-
 };
