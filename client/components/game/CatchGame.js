@@ -77,7 +77,7 @@ const CatchGame = () => {
     };
 
     const drop = () => {
-      if (Date.now() - startTime <= 10000) {
+      if (Date.now() - startTime <= 60000) {
         let myImg = new Image();
         const imgCol = [e1, e2, p1, p2, p3, p4];
         const random = Math.floor(Math.random() * imgCol.length)
