@@ -41,7 +41,7 @@
     "start": "nodemon ./server/server.js",
     "build": "webpack",
     "dev-bk": "webpack-dev-server --open --color",
-    "dev": "nodemon server/index.js & webpack-dev-server --open --color",
+    "dev": "nodemon server/server.js & webpack-dev-server --open --color",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
