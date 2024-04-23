@@ -37,7 +37,7 @@ export const sendScore = createAsyncThunk(
     event.preventDefault();
 
     try {
-      let response = await fetch('http://localhost:3000/sendscore', {
+      let response = await fetch('http://sandbox-server-eta.vercel.app/sendscore', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +62,7 @@ export const getScore = createAsyncThunk(
   "getScore",
   async (thunkAPI) =>{
     try {
-      let response = await fetch('http://localhost:3000/getscore', {
+      let response = await fetch('http://sandbox-server-eta.vercel.app/getscore', {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
